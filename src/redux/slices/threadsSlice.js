@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getDetailThreadById, getThreads } from "../../utils/api";
+import { getDetailThreadById, getThreads, createThread } from "../../utils/api";
 
 export const fetchThreads = createAsyncThunk(
   "threads/fetchThreads",
@@ -14,8 +14,19 @@ export const fetchThreadsById = createAsyncThunk(
   async (threadId, { rejectWithValue }) => {
     try {
       const response = await getDetailThreadById(threadId);
-      // console.log(response.detailThread);
       return response.detailThread;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const createThreadAsync = createAsyncThunk(
+  "threads/createThread",
+  async (threadData, { rejectWithValue }) => {
+    try {
+      const response = await createThread(threadData);
+      return response.data.thread;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -56,6 +67,18 @@ const threadsSlice = createSlice({
       .addCase(fetchThreadsById.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(createThreadAsync.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(createThreadAsync.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.threads.push(action.payload);
+      })
+      .addCase(createThreadAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
       });
   },
 });

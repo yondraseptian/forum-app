@@ -13,19 +13,29 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    dispatch(loginUserAsync({ email, password }));
-    if (!error) {
-      navigate("/");
+    try {
+      await dispatch(loginUserAsync({ email, password }));
+      if (!error) {
+        navigate("/");
+      } else {
+        console.error("Failed to log in:", error);
+        if (error !== "Unauthorized") {
+          alert("Failed to log in: " + error);
+        }
+      }
+    } catch (error) {
+      alert("Failed to log in: " + error.message);
     }
   };
   return (
     <div>
-      <h1>Login</h1>
+      <h1 className="text-4xl font-bold mb-3">Login</h1>
       <Input
         type="text"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         className="border-solid border-2 p-2"
+        placeholder=""
       >
         Email
       </Input>
@@ -34,6 +44,7 @@ const Login = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         className="border-solid border-2 p-2"
+        placeholder=""
       >
         Password
       </Input>

@@ -5,7 +5,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "./redux/slices/loginSlice";
-import DetailThread from "./components/DetailThread";
+import DetailThread from "./pages/DetailThread";
+import AddThread from "./pages/AddThread";
+import LeaderBoardPage from "./pages/LeaderBoardPage";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
@@ -28,8 +30,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/threads/:id" element={<DetailThread isLoggedIn={isLoggedIn}/>} />
+          <Route path="/threads/:id" element={<DetailThread />} />
           <Route path="*" element={<Home />} />
+          <Route path="/new" element={<AddThread />} />
+          <Route path="/leaderboard" element={<LeaderBoardPage />} />
         </Routes>
       </main>
     </div>

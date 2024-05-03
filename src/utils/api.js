@@ -28,6 +28,19 @@ export const loginUser = async ({ email, password }) => {
   }
 };
 
+export const getProfile = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/users/me`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+    return response.data.data.user;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
 export const getDetailThreadById = async (id) => {
   try {
     const response = await axios.get(`${BASE_URL}/threads/${id}`);
@@ -35,4 +48,146 @@ export const getDetailThreadById = async (id) => {
   } catch (error) {
     throw new Error(error.response.data.message);
   }
-}
+};
+
+export const createThread = async (threadData) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/threads`, threadData, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+    return response.data.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const createComment = async (threadId, commentData) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/threads/${threadId}/comments`,
+      commentData,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+    return response.data.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const upVoteThread = async (threadId) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/threads/${threadId}/up-vote`,
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+    return response.data.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const downVoteThread = async (threadId) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/threads/${threadId}/down-vote`,
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+
+    return response.data.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const neutralizeThreadVote = async (threadId) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/threads/${threadId}/neutral-vote`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+    console.log(response.data.data);
+    return response.data.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const upVoteComment = async (commentId) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/comments/${commentId}/up-vote`,
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+    return response.data.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const downVoteComment = async (commentId) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/comments/${commentId}/down-vote`,
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+    return response.data.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const neutralizeCommentVote = async (commentId) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/comments/${commentId}/neutral-vote`,
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+    return response.data.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const getLeaderBoard = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/leaderboards`);
+    return response.data.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};

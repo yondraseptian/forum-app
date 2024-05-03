@@ -7,10 +7,14 @@ const HeaderNav = ({ handleLogout, isLoggedIn }) => {
       <h1 className="text-2xl font-bold text-background">Forum App</h1>
       <ul className="flex gap-4 text-background">
         <li>
-          <button className="py-1">treads</button>
+          <Link to="/">
+            <button className="py-1">treads</button>
+          </Link>
         </li>
         <li>
-          <button className="py-1">LeaderBoard</button>
+          <Link to="/leaderboard">
+            <button className="py-1">LeaderBoard</button>
+          </Link>
         </li>
         {isLoggedIn ? (
           <li>

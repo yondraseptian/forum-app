@@ -1,8 +1,8 @@
-import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { formatDate } from "../utils/dateFormat";
 import { FaRegComments } from "react-icons/fa6";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import VotesComponent from "./VotesComponent";
 
 const ListTreads = (props) => {
   const { threads, users } = props;
@@ -28,15 +28,8 @@ const ListTreads = (props) => {
                       : thread.body,
                 }}
               />
-              <div className="flex gap-4">
-                <button className="flex items-center">
-                  <AiOutlineLike />
-                  <span>{thread.upVotesBy.length}</span>
-                </button>
-                <button className="flex items-center">
-                  <AiOutlineDislike />
-                  <span>{thread.downVotesBy.length}</span>
-                </button>
+              <div className="flex gap-4 text-xl">
+                <VotesComponent thread={thread} id={thread.id} />
                 <button className="flex items-center">
                   <FaRegComments />
                   <span>{thread.totalComments}</span>

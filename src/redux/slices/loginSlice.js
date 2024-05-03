@@ -42,7 +42,7 @@ const loginSlice = createSlice({
       .addCase(loginUserAsync.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-        alert(action.payload);
+        // alert(action.payload);
       });
   },
 });
