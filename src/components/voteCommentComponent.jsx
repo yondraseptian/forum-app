@@ -13,14 +13,14 @@ import {
   upVoteCommentAsync,
 } from "../redux/slices/votesSlice.js";
 
-const VotesCommentComponent = ({ comment, id }) => {
+const VotesCommentComponent = ({ threadId, comment }) => {
   const dispatch = useDispatch();
   const [voteType, setVoteType] = useState(0);
   const [upVotesCount, setUpVotesCount] = useState(comment.upVotesBy.length);
   const [downVotesCount, setDownVotesCount] = useState(
     comment.downVotesBy.length
   );
-  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const userId = useSelector((state) => state.users.profile?.id);
 
   useEffect(() => {
@@ -35,13 +35,15 @@ const VotesCommentComponent = ({ comment, id }) => {
   const getVoteTypeForUser = (comment) => {
     if (userId) {
       if (comment.upVotesBy.includes(userId)) {
-        return 1; // Up-vote
+        return 1;
       } else if (comment.downVotesBy.includes(userId)) {
-        return -1; // Down-vote
+        return -1;
       }
     }
-    return 0; // Neutral
+    return 0;
   };
+
+  const id = comment.id;
 
   const handleVote = async (vote) => {
     if (!isLoggedIn) {
@@ -52,11 +54,11 @@ const VotesCommentComponent = ({ comment, id }) => {
     switch (vote) {
       case 1:
         if (voteType === 1) {
-          await dispatch(neutralizeCommentVoteAsync(id));
+          await dispatch(neutralizeCommentVoteAsync({ threadId, commentId:id }));
           setVoteType(0);
           setUpVotesCount(upVotesCount - 1);
         } else {
-          await dispatch(upVoteCommentAsync(id));
+          await dispatch(upVoteCommentAsync({ threadId, commentId:id }));
           setVoteType(1);
           setUpVotesCount(upVotesCount + 1);
           if (voteType === -1) {
@@ -66,11 +68,11 @@ const VotesCommentComponent = ({ comment, id }) => {
         break;
       case -1:
         if (voteType === -1) {
-          await dispatch(neutralizeCommentVoteAsync(id));
+          await dispatch(neutralizeCommentVoteAsync({ threadId, commentId:id }));
           setVoteType(0);
           setDownVotesCount(downVotesCount - 1);
         } else {
-          await dispatch(downVoteCommentAsync(id));
+          await dispatch(downVoteCommentAsync({ threadId, commentId:id }));
           setVoteType(-1);
           setDownVotesCount(downVotesCount + 1);
           if (voteType === 1) {
@@ -113,5 +115,5 @@ export default VotesCommentComponent;
 
 VotesCommentComponent.propTypes = {
   comment: PropTypes.object.isRequired,
-  id: PropTypes.string.isRequired,
+  threadId: PropTypes.string.isRequired,
 };

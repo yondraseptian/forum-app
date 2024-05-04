@@ -4,13 +4,13 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "./redux/slices/loginSlice";
+import { logout } from "./redux/slices/authSlice";
 import DetailThread from "./pages/DetailThread";
 import AddThread from "./pages/AddThread";
 import LeaderBoardPage from "./pages/LeaderBoardPage";
 
 function App() {
-  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();

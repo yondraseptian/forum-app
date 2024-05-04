@@ -1,7 +1,13 @@
 const formatDate = (timestamp) => {
   const date = new Date(timestamp);
   const now = new Date();
-  const seconds = Math.floor((now - date) / 1000);
+  const milliseconds = now - date;
+
+  if (milliseconds < 1000) {
+    return "Baru saja";
+  }
+
+  const seconds = Math.floor(milliseconds / 1000);
 
   let interval = Math.floor(seconds / 86400);
   if (interval > 1) {
@@ -18,7 +24,7 @@ const formatDate = (timestamp) => {
     return `${interval} menit lalu`;
   }
 
-  return `${Math.floor(seconds)} detik lalu`;
+  return `${seconds} detik lalu`;
 };
 
 export { formatDate };

@@ -15,8 +15,7 @@ const DetailThread = () => {
   const thread = useSelector((state) =>
     state.threads.detailThread.find((t) => t.id === id)
   );
-  const { status, error } = useSelector((state) => state.threads);
-  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const [commentAdded, setCommentAdded] = useState(false);
 
   useEffect(() => {
@@ -31,74 +30,75 @@ const DetailThread = () => {
     }
   }, [commentAdded, dispatch, id]);
 
+  if (!thread) {
+    return <div>Loading...</div>;
+  }
+
   const handleCommentAdded = () => {
     setCommentAdded(true);
   };
+
   return (
     <div className="p-4">
-      {status === "loading" && <div>Loading...</div>}
-      {status === "failed" && <div>Error: {error}</div>}
-      {status === "succeeded" && (
-        <div>
-          <h1 className="text-4xl font-semibold pb-3">{thread.title}</h1>
-          <p
-            className="text-lg pb-3"
-            dangerouslySetInnerHTML={{ __html: thread.body }}
-          ></p>
-          <div className="flex gap-4 pb-4 text-xl">
-            <VotesComponent thread={thread} id={id} />
-            <button className="flex items-center">
-              <FaRegComments />
-              <span>{thread.totalComments}</span>
-            </button>
-            <p>{formatDate(thread.createdAt)}</p>
-            <p>dibuat oleh</p>
-            <div className="flex gap-2">
-              <img
-                src={thread.owner.avatar}
-                alt=""
-                className="w-6 h-6 rounded-full"
-              />
-              <span className="font-bold"> {thread.owner.name}</span>
-            </div>
-          </div>
-          <AddComment
-            isLoggedIn={isLoggedIn}
-            threadId={id}
-            onCommentAdded={handleCommentAdded}
-          />
-          <h2 className="text-2xl font-semibold pb-3">
-            Komentar({thread.comments.length})
-          </h2>
-          <div>
-            {thread.comments.map((comment) => (
-              <div
-                className="border-solid border-b-2 p-2 w-full"
-                key={comment.id}
-              >
-                <div className="flex justify-between pb-4">
-                  <div>
-                    <div className="flex gap-2">
-                      <img
-                        src={comment.owner.avatar}
-                        alt=""
-                        className="w-6 h-6 rounded-full"
-                      />
-                      <span className="font-bold"> {comment.owner.name}</span>
-                    </div>
-                    <p
-                      className="text-lg"
-                      dangerouslySetInnerHTML={{ __html: comment.content }}
-                    ></p>
-                  </div>
-                  <p>{formatDate(comment.createdAt)}</p>
-                </div>
-                <VotesCommentComponent comment={comment} id={comment.id} />
-              </div>
-            ))}
+      <div>
+        <h1 className="text-4xl font-semibold pb-3">{thread.title}</h1>
+        <p
+          className="text-lg pb-3"
+          dangerouslySetInnerHTML={{ __html: thread.body }}
+        ></p>
+        <div className="flex gap-4 pb-4 text-xl">
+          <VotesComponent thread={thread} id={id} />
+          <button className="flex items-center">
+            <FaRegComments />
+            <span>{thread.totalComments}</span>
+          </button>
+          <p>{formatDate(thread.createdAt)}</p>
+          <p>dibuat oleh</p>
+          <div className="flex gap-2">
+            <img
+              src={thread.owner.avatar}
+              alt=""
+              className="w-6 h-6 rounded-full"
+            />
+            <span className="font-bold"> {thread.owner.name}</span>
           </div>
         </div>
-      )}
+        <AddComment
+          isLoggedIn={isLoggedIn}
+          threadId={id}
+          onCommentAdded={handleCommentAdded}
+        />
+        <h2 className="text-2xl font-semibold pb-3">
+          Komentar({thread.comments.length})
+        </h2>
+        <div>
+          {thread.comments.map((comment) => (
+            <div
+              className="border-solid border-b-2 p-2 w-full"
+              key={comment.id}
+            >
+              <div className="flex justify-between pb-4">
+                <div>
+                  <div className="flex gap-2">
+                    <img
+                      src={comment.owner.avatar}
+                      alt=""
+                      className="w-6 h-6 rounded-full"
+                    />
+                    <span className="font-bold"> {comment.owner.name}</span>
+                  </div>
+                  <p
+                    className="text-lg"
+                    dangerouslySetInnerHTML={{ __html: comment.content }}
+                  ></p>
+                </div>
+                <p>{formatDate(comment.createdAt)}</p>
+              </div>
+              <VotesCommentComponent threadId={id} comment={comment} id={comment.id} />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

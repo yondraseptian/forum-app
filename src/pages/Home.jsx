@@ -11,7 +11,7 @@ const Home = () => {
   const threads = useSelector((state) => state.threads.threads);
   const users = useSelector((state) => state.users.users);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   useEffect(() => {
     dispatch(fetchThreads());

@@ -28,6 +28,19 @@ export const loginUser = async ({ email, password }) => {
   }
 };
 
+export const registerUser = async (name, email, password) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/register`, {
+      name: name,
+      email: email,
+      password: password
+    });
+    return response.data.data.user;
+  } catch (error) {
+    throw new Error(error.response.data.message || 'Failed to register user');
+  }
+};
+
 export const getProfile = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/users/me`, {
@@ -119,23 +132,6 @@ export const neutralizeThreadVote = async (threadId) => {
   try {
     const response = await axios.post(
       `${BASE_URL}/threads/${threadId}/neutral-vote`,
-      {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    );
-    console.log(response.data.data);
-    return response.data.data;
-  } catch (error) {
-    throw new Error(error.response.data.message);
-  }
-};
-
-export const upVoteComment = async (commentId) => {
-  try {
-    const response = await axios.post(
-      `${BASE_URL}/comments/${commentId}/up-vote`,
       {},
       {
         headers: {
@@ -149,10 +145,10 @@ export const upVoteComment = async (commentId) => {
   }
 };
 
-export const downVoteComment = async (commentId) => {
+export const upVoteComment = async (threadId,commentId) => {
   try {
     const response = await axios.post(
-      `${BASE_URL}/comments/${commentId}/down-vote`,
+      `${BASE_URL}/threads/${threadId}/comments/${commentId}/up-vote`,
       {},
       {
         headers: {
@@ -166,10 +162,27 @@ export const downVoteComment = async (commentId) => {
   }
 };
 
-export const neutralizeCommentVote = async (commentId) => {
+export const downVoteComment = async (threadId, commentId) => {
   try {
     const response = await axios.post(
-      `${BASE_URL}/comments/${commentId}/neutral-vote`,
+      `${BASE_URL}/threads/${threadId}/comments/${commentId}/down-vote`,
+      {},
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+    return response.data.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const neutralizeCommentVote = async (threadId,commentId) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/threads/${threadId}/comments/${commentId}/neutral-vote`,
       {},
       {
         headers: {
@@ -186,7 +199,7 @@ export const neutralizeCommentVote = async (commentId) => {
 export const getLeaderBoard = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/leaderboards`);
-    return response.data.data;
+    return response.data.data.leaderboards;
   } catch (error) {
     throw new Error(error.response.data.message);
   }

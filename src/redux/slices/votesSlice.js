@@ -47,9 +47,9 @@ export const neutralizeThreadVoteAsync = createAsyncThunk(
 
 export const upVoteCommentAsync = createAsyncThunk(
   "votes/upVoteComment",
-  async (commentId, { rejectWithValue }) => {
+  async ({threadId,commentId}, { rejectWithValue }) => {
     try {
-      const vote = await upVoteComment(commentId);
+      const vote = await upVoteComment(threadId,commentId);
       return vote;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -59,9 +59,9 @@ export const upVoteCommentAsync = createAsyncThunk(
 
 export const downVoteCommentAsync = createAsyncThunk(
   "votes/downVoteComment",
-  async (commentId, { rejectWithValue }) => {
+  async ({threadId,commentId}, { rejectWithValue }) => {
     try {
-      const vote = await downVoteComment(commentId);
+      const vote = await downVoteComment(threadId,commentId);
       return vote;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -71,9 +71,9 @@ export const downVoteCommentAsync = createAsyncThunk(
 
 export const neutralizeCommentVoteAsync = createAsyncThunk(
   "votes/neutralizeCommentVote",
-  async (commentId, { rejectWithValue }) => {
+  async ({threadId,commentId}, { rejectWithValue }) => {
     try {
-      const vote = await neutralizeCommentVote(commentId);
+      const vote = await neutralizeCommentVote(threadId,commentId);
       return vote;
     } catch (error) {
       return rejectWithValue(error.message);

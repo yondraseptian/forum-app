@@ -14,6 +14,7 @@ const ListTreads = (props) => {
         return (
           <div className="justify-start flex px-6" key={thread.id}>
             <div className="border-solid border-b-2 p-2 w-full">
+              <p className="text-base font-medium border-solid border-2 px-2 py-1 w-fit border-primary rounded-lg">#{thread.category}</p>
               <Link to={`/threads/${thread.id}`}>
                 <h1 className="text-xl font-bold cursor-pointer">
                   {thread.title}

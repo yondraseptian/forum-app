@@ -1,17 +1,71 @@
-import { Input } from "../components/Input";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
-import { Link } from "react-router-dom";
+import { Input } from "../components/Input";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { registerUserAsync } from "../redux/slices/authSlice";
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { loading, error } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  const handleRegister = async () => {
+    try {
+      await dispatch(registerUserAsync({ name, email, password }));
+      if(!error) {
+        navigate("/login");
+      } else {
+        if (error !== "Unauthorized") {
+          alert("Failed to register: " + error);
+        }
+      }
+    } catch (error) {
+      alert("Failed to register: " + error.message);
+    }
+  };
+
   return (
     <div>
-      <h1>Register</h1>
-      <Input type="text" className="border-solid border-2 p-2">Username</Input>
-      <Input type="email" className="border-solid border-2 p-2">Email</Input>
-      <Input type="password" className="border-solid border-2 p-2">Password</Input>
-      <Button className="bg-primary text-white my-3 w-full py-3 rounded-md">
+      <h1 className="text-4xl font-bold mb-3">Register</h1>
+      <Input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className="border-solid border-2 p-2"
+        placeholder=""
+      >
+        Name
+      </Input>
+      <Input
+        type="text"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="border-solid border-2 p-2"
+        placeholder=""
+      >
+        Email
+      </Input>
+      <Input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="border-solid border-2 p-2"
+        placeholder=""
+      >
+        Password
+      </Input>
+      <Button
+        className="bg-primary text-white my-3 w-full py-3 rounded-md"
+        onClick={handleRegister}
+        disabled={loading}
+      >
         Register
       </Button>
+      {error && <p className="text-red-500">{error}</p>}
       <p>
         Sudah punya akun?{" "}
         <Link to="/login">

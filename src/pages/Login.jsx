@@ -3,13 +3,13 @@ import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { loginUserAsync } from "../redux/slices/loginSlice";
+import { loginUserAsync } from "../redux/slices/authSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { loading, error } = useSelector((state) => state.login);
+  const { loading, error } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -18,7 +18,6 @@ const Login = () => {
       if (!error) {
         navigate("/");
       } else {
-        console.error("Failed to log in:", error);
         if (error !== "Unauthorized") {
           alert("Failed to log in: " + error);
         }

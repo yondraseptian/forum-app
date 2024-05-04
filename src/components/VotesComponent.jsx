@@ -20,7 +20,7 @@ const VotesComponent = ({ thread, id }) => {
   const [downVotesCount, setDownVotesCount] = useState(
     thread.downVotesBy.length
   );
-  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const userId = useSelector((state) => state.users.profile?.id);
 
   useEffect(() => {
@@ -35,12 +35,12 @@ const VotesComponent = ({ thread, id }) => {
   const getVoteTypeForUser = (thread) => {
     if (userId) {
       if (thread.upVotesBy.includes(userId)) {
-        return 1; // Up-vote
+        return 1;
       } else if (thread.downVotesBy.includes(userId)) {
-        return -1; // Down-vote
+        return -1;
       }
     }
-    return 0; // Neutral
+    return 0;
   };
 
   const handleVote = async (vote) => {
@@ -64,7 +64,7 @@ const VotesComponent = ({ thread, id }) => {
           }
         }
         break;
-      case -1: // Down-vote
+      case -1:
         if (voteType === -1) {
           await dispatch(neutralizeThreadVoteAsync(id));
           setVoteType(0);

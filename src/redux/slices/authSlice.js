@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { loginUser } from "../../utils/api";
+import { loginUser, registerUser } from "../../utils/api";
 
 export const loginUserAsync = createAsyncThunk(
   "login/loginUser",
@@ -12,8 +12,19 @@ export const loginUserAsync = createAsyncThunk(
   }
 );
 
-const loginSlice = createSlice({
-  name: "login",
+export const registerUserAsync = createAsyncThunk(
+  "register/registerUser",
+  async ({ name, email, password }, { rejectWithValue }) => {
+    try {
+      return await registerUser(name, email, password);
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+const authSlice = createSlice({
+  name: "auth",
   initialState: {
     token: localStorage.getItem("token") || null,
     isLoggedIn: localStorage.getItem("token") ? true : false,
@@ -42,10 +53,20 @@ const loginSlice = createSlice({
       .addCase(loginUserAsync.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-        // alert(action.payload);
+      })
+      .addCase(registerUserAsync.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(registerUserAsync.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(registerUserAsync.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       });
   },
 });
 
-export const { logout } = loginSlice.actions;
-export default loginSlice;
+export const { logout } = authSlice.actions;
+export default authSlice;

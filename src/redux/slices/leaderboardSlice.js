@@ -2,11 +2,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getLeaderBoard } from "../../utils/api";
 
 export const fetchLeaderBoard = createAsyncThunk(
-  "leaderboard/fetchLeaderBoard",
+  "leaderboards/fetchLeaderBoard",
   async () => {
     try {
-      const leaderboard = await getLeaderBoard();
-      return leaderboard;
+      const leaderboards = await getLeaderBoard();
+      return leaderboards;
     } catch (error) {
       throw new Error(error.message);
     }
@@ -14,13 +14,13 @@ export const fetchLeaderBoard = createAsyncThunk(
 );
 
 const initialState = {
-  leaderboard: [],
+  leaderboards: [],
   status: "idle",
   error: null,
 };
 
-const leaderboardSlice = createSlice({
-  name: "leaderboard",
+const leaderboardsSlice = createSlice({
+  name: "leaderboards",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -31,7 +31,7 @@ const leaderboardSlice = createSlice({
       })
       .addCase(fetchLeaderBoard.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.leaderboard = action.payload;
+        state.leaderboards = action.payload;
       })
       .addCase(fetchLeaderBoard.rejected, (state, action) => {
         state.status = "failed";
@@ -40,4 +40,4 @@ const leaderboardSlice = createSlice({
   },
 });
 
-export default leaderboardSlice;
+export default leaderboardsSlice;
