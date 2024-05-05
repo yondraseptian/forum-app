@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
   upVoteThread,
   downVoteThread,
@@ -6,11 +6,11 @@ import {
   upVoteComment,
   downVoteComment,
   neutralizeCommentVote,
-} from "../../utils/api.js";
+} from '../../utils/api';
 
 // Async Thunks
 export const upVoteThreadAsync = createAsyncThunk(
-  "votes/upVoteThread",
+  'votes/upVoteThread',
   async (threadId, { rejectWithValue }) => {
     try {
       const vote = await upVoteThread(threadId);
@@ -18,11 +18,11 @@ export const upVoteThreadAsync = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const downVoteThreadAsync = createAsyncThunk(
-  "votes/downVoteThread",
+  'votes/downVoteThread',
   async (threadId, { rejectWithValue }) => {
     try {
       const vote = await downVoteThread(threadId);
@@ -30,11 +30,11 @@ export const downVoteThreadAsync = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const neutralizeThreadVoteAsync = createAsyncThunk(
-  "votes/neutralizeThreadVote",
+  'votes/neutralizeThreadVote',
   async (threadId, { rejectWithValue }) => {
     try {
       const vote = await neutralizeThreadVote(threadId);
@@ -42,93 +42,99 @@ export const neutralizeThreadVoteAsync = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const upVoteCommentAsync = createAsyncThunk(
-  "votes/upVoteComment",
-  async ({threadId,commentId}, { rejectWithValue }) => {
+  'votes/upVoteComment',
+  async ({ threadId, commentId }, { rejectWithValue }) => {
     try {
-      const vote = await upVoteComment(threadId,commentId);
+      const vote = await upVoteComment(threadId, commentId);
       return vote;
     } catch (error) {
       return rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const downVoteCommentAsync = createAsyncThunk(
-  "votes/downVoteComment",
-  async ({threadId,commentId}, { rejectWithValue }) => {
+  'votes/downVoteComment',
+  async ({ threadId, commentId }, { rejectWithValue }) => {
     try {
-      const vote = await downVoteComment(threadId,commentId);
+      const vote = await downVoteComment(threadId, commentId);
       return vote;
     } catch (error) {
       return rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const neutralizeCommentVoteAsync = createAsyncThunk(
-  "votes/neutralizeCommentVote",
-  async ({threadId,commentId}, { rejectWithValue }) => {
+  'votes/neutralizeCommentVote',
+  async ({ threadId, commentId }, { rejectWithValue }) => {
     try {
-      const vote = await neutralizeCommentVote(threadId,commentId);
+      const vote = await neutralizeCommentVote(threadId, commentId);
       return vote;
     } catch (error) {
       return rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 // Initial State
 const initialState = {
-  votingStatus: "idle",
+  votingStatus: 'idle',
   error: null,
 };
 
 // Slice
 const votesSlice = createSlice({
-  name: "votes",
+  name: 'votes',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addMatcher(
-        (action) => action.type.startsWith("votes/upVote"),
-        (state) => {
-          state.votingStatus = "loading";
-          state.error = null;
-        }
+        (action) => action.type.startsWith('votes/upVote'),
+        (state) => ({
+          ...state,
+          votingStatus: 'loading',
+          error: null,
+        }),
       )
       .addMatcher(
-        (action) => action.type.startsWith("votes/downVote"),
-        (state) => {
-          state.votingStatus = "loading";
-          state.error = null;
-        }
+        (action) => action.type.startsWith('votes/downVote'),
+        (state) => ({
+          ...state,
+          votingStatus: 'loading',
+          error: null,
+        }),
       )
       .addMatcher(
-        (action) => action.type.startsWith("votes/neutralize"),
-        (state) => {
-          state.votingStatus = "loading";
-          state.error = null;
-        }
+        (action) => action.type.startsWith('votes/neutralize'),
+        (state) => ({
+          ...state,
+          votingStatus: 'loading',
+          error: null,
+        }),
       )
       .addMatcher(
-        (action) => action.type.endsWith("fulfilled"),
-        (state) => {
-          state.votingStatus = "succeeded";
-        }
+        (action) => action.type.endsWith('fulfilled'),
+        (state) => ({
+          ...state,
+          votingStatus: 'succeeded',
+          error: null,
+        }),
       )
       .addMatcher(
-        (action) => action.type.endsWith("rejected"),
-        (state, action) => {
-          state.votingStatus = "failed";
-          state.error = action.payload;
-        }
+        (action) => action.type.endsWith('rejected'),
+        (state, action) => ({
+          ...state,
+          votingStatus: 'failed',
+          error: action.error.message,
+        }),
       );
   },
 });
 
-export default votesSlice;
+export default votesSlice.reducer;

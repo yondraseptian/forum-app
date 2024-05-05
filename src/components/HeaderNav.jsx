@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const HeaderNav = ({ handleLogout, isLoggedIn }) => {
   return (
-    <div className="flex justify-between items-center p-4 border-solid border-b-2 fixed w-full bg-primary">
+    <div className="flex justify-between items-center p-4 border-solid border-b-2 fixed w-full bg-primary z-20">
       <h1 className="text-2xl font-bold text-background">Forum App</h1>
       <ul className="flex gap-4 text-background">
         <li>

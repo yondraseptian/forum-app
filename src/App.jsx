@@ -8,6 +8,7 @@ import { logout } from "./redux/slices/authSlice";
 import DetailThread from "./pages/DetailThread";
 import AddThread from "./pages/AddThread";
 import LeaderBoardPage from "./pages/LeaderBoardPage";
+import { LoadingBar } from "react-redux-loading-bar";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -24,6 +25,9 @@ function App() {
     <div>
       <header>
         <HeaderNav handleLogout={handleLogout} isLoggedIn={isLoggedIn} />
+        <div className="z-10 mt-16 w-full fixed">
+          <LoadingBar className="h-2 bg-red-500 w-full" />
+        </div>
       </header>
       <main className="bg-white mx-auto my-0 block max-w-4xl min-h-screen pt-24">
         <Routes>

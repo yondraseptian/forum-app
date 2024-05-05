@@ -4,7 +4,7 @@ const formatDate = (timestamp) => {
   const milliseconds = now - date;
 
   if (milliseconds < 1000) {
-    return "Baru saja";
+    return 'Baru saja';
   }
 
   const seconds = Math.floor(milliseconds / 1000);
@@ -27,4 +27,5 @@ const formatDate = (timestamp) => {
   return `${seconds} detik lalu`;
 };
 
+// eslint-disable-next-line import/prefer-default-export
 export { formatDate };

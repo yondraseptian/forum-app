@@ -1,8 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createComment } from "../../utils/api";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createComment } from '../../utils/api';
 
 export const createCommentAsync = createAsyncThunk(
-  "comment/createCommentAsync",
+  'comment/createCommentAsync',
   async ({ threadId, commentData }, { rejectWithValue }) => {
     try {
       const response = await createComment(threadId, commentData);
@@ -10,33 +10,37 @@ export const createCommentAsync = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 const initialState = {
   comment: null,
-  status: "idle",
+  status: 'idle',
   error: null,
 };
 
 const commentSlice = createSlice({
-  name: "comments",
+  name: 'comments',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(createCommentAsync.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(createCommentAsync.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.comment = action.payload;
-      })
-      .addCase(createCommentAsync.rejected, (state, action) => {
-        state.status = "failed";
-        state.action = action.error.message;
-      });
+      .addCase(createCommentAsync.pending, (state) => ({
+        ...state,
+        status: 'loading',
+      }))
+      .addCase(createCommentAsync.fulfilled, (state, action) => ({
+        ...state,
+        status: 'succeeded',
+        comment: action.payload,
+      }))
+      .addCase(createCommentAsync.rejected, (state, action) => ({
+        ...state,
+        status: 'failed',
+        error: action.error.message,
+      }));
   },
+
 });
 
-export default commentSlice;
+export default commentSlice.reducer;

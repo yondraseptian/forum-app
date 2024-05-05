@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-const BASE_URL = "https://forum-api.dicoding.dev/v1";
+const BASE_URL = 'https://forum-api.dicoding.dev/v1';
 
 export const getThreads = async () => {
   try {
@@ -31,9 +31,9 @@ export const loginUser = async ({ email, password }) => {
 export const registerUser = async (name, email, password) => {
   try {
     const response = await axios.post(`${BASE_URL}/register`, {
-      name: name,
-      email: email,
-      password: password
+      name,
+      email,
+      password,
     });
     return response.data.data.user;
   } catch (error) {
@@ -45,7 +45,7 @@ export const getProfile = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/users/me`, {
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     });
     return response.data.data.user;
@@ -67,7 +67,7 @@ export const createThread = async (threadData) => {
   try {
     const response = await axios.post(`${BASE_URL}/threads`, threadData, {
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     });
     return response.data.data;
@@ -83,9 +83,9 @@ export const createComment = async (threadId, commentData) => {
       commentData,
       {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
-      }
+      },
     );
     return response.data.data;
   } catch (error) {
@@ -100,9 +100,9 @@ export const upVoteThread = async (threadId) => {
       {},
       {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
-      }
+      },
     );
     return response.data.data;
   } catch (error) {
@@ -117,9 +117,9 @@ export const downVoteThread = async (threadId) => {
       {},
       {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
-      }
+      },
     );
 
     return response.data.data;
@@ -135,9 +135,9 @@ export const neutralizeThreadVote = async (threadId) => {
       {},
       {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
-      }
+      },
     );
     return response.data.data;
   } catch (error) {
@@ -145,16 +145,16 @@ export const neutralizeThreadVote = async (threadId) => {
   }
 };
 
-export const upVoteComment = async (threadId,commentId) => {
+export const upVoteComment = async (threadId, commentId) => {
   try {
     const response = await axios.post(
       `${BASE_URL}/threads/${threadId}/comments/${commentId}/up-vote`,
       {},
       {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
-      }
+      },
     );
     return response.data.data;
   } catch (error) {
@@ -169,9 +169,9 @@ export const downVoteComment = async (threadId, commentId) => {
       {},
       {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
-      }
+      },
     );
     return response.data.data;
   } catch (error) {
@@ -179,16 +179,16 @@ export const downVoteComment = async (threadId, commentId) => {
   }
 };
 
-export const neutralizeCommentVote = async (threadId,commentId) => {
+export const neutralizeCommentVote = async (threadId, commentId) => {
   try {
     const response = await axios.post(
       `${BASE_URL}/threads/${threadId}/comments/${commentId}/neutral-vote`,
       {},
       {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
-      }
+      },
     );
     return response.data.data;
   } catch (error) {

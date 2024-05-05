@@ -8,7 +8,7 @@ const LeaderBoardPage = () => {
   const { status, error } = useSelector((state) => state.leaderboard);
 
   useEffect(() => {
-    dispatch(fetchLeaderBoard());
+    dispatch(fetchLeaderBoard())
   }, [dispatch]);
   return (
     <div>
