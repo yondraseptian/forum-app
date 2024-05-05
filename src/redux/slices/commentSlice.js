@@ -1,13 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import { createComment } from '../../utils/api';
 
 export const createCommentAsync = createAsyncThunk(
   'comment/createCommentAsync',
-  async ({ threadId, commentData }, { rejectWithValue }) => {
+  async ({ threadId, commentData }, { rejectWithValue, dispatch }) => {
     try {
+      dispatch(showLoading());
       const response = await createComment(threadId, commentData);
+      dispatch(hideLoading());
       return response.data.comments;
     } catch (error) {
+      dispatch(hideLoading());
       return rejectWithValue(error.message);
     }
   },

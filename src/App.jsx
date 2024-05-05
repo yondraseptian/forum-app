@@ -8,7 +8,7 @@ import { logout } from "./redux/slices/authSlice";
 import DetailThread from "./pages/DetailThread";
 import AddThread from "./pages/AddThread";
 import LeaderBoardPage from "./pages/LeaderBoardPage";
-import { LoadingBar } from "react-redux-loading-bar";
+import  LoadingBar  from "react-redux-loading-bar";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
