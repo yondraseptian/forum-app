@@ -8,10 +8,10 @@ export const loginUserAsync = createAsyncThunk(
     try {
       dispatch(showLoading());
       const response = await loginUser({ email, password });
+      localStorage.setItem('token', response);
       dispatch(hideLoading());
       return response;
     } catch (error) {
-      dispatch(hideLoading());
       return rejectWithValue(error.message);
     }
   },
@@ -24,7 +24,7 @@ export const registerUserAsync = createAsyncThunk(
       dispatch(showLoading());
       const response = await registerUser(name, email, password);
       dispatch(hideLoading());
-      return response;
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
