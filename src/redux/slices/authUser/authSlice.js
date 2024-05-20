@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
-import { loginUser, registerUser } from '../../utils/api';
+import { loginUser, registerUser } from '../../../utils/api';
 
 export const loginUserAsync = createAsyncThunk(
   'login/loginUser',

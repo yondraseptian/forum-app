@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
-import { getLeaderBoard } from '../../utils/api';
+import { getLeaderBoard } from '../../../utils/api';
 
 export const fetchLeaderBoard = createAsyncThunk(
   'leaderboards/fetchLeaderBoard',

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
-import { createThreadAsync } from "../redux/slices/threadsSlice";
+import { createThreadAsync } from "../redux/slices/thread/threadsSlice";
 import { useNavigate } from "react-router-dom";
 
 const AddThread = () => {

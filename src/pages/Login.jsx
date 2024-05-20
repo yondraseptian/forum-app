@@ -3,7 +3,7 @@ import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { loginUserAsync } from "../redux/slices/authSlice";
+import { loginUserAsync } from "../redux/slices/authUser/authSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const Login = () => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         className="border-solid border-2 p-2"
-        placeholder=""
+        placeholder="Email"
       >
         Email
       </Input>
@@ -43,7 +43,7 @@ const Login = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         className="border-solid border-2 p-2"
-        placeholder=""
+        placeholder="Password"
       >
         Password
       </Input>

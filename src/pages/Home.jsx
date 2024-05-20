@@ -2,8 +2,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import ListTreads from "../components/ListTreads";
 import { useEffect, useState } from "react";
-import { fetchThreads } from "../redux/slices/threadsSlice";
-import { fetchProfile, fetchUsers } from "../redux/slices/userSlice";
+import { fetchThreads } from "../redux/slices/thread/threadsSlice";
+import { fetchProfile, fetchUsers } from "../redux/slices/users/userSlice";
 import { Link } from "react-router-dom";
 
 const Home = () => {

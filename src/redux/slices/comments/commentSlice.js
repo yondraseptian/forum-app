@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
-import { createComment } from '../../utils/api';
+import { createComment } from '../../../utils/api';
 
 export const createCommentAsync = createAsyncThunk(
   'comment/createCommentAsync',
@@ -32,6 +32,7 @@ const commentSlice = createSlice({
       .addCase(createCommentAsync.pending, (state) => ({
         ...state,
         status: 'loading',
+        error: null,
       }))
       .addCase(createCommentAsync.fulfilled, (state, action) => ({
         ...state,

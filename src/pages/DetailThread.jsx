@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { FaRegComments } from "react-icons/fa6";
 import { formatDate } from "../utils/dateFormat";
-import { fetchThreadsById } from "../redux/slices/threadsSlice";
+import { fetchThreadsById } from "../redux/slices/thread/threadsSlice";
 import AddComment from "../components/AddComment";
-import { fetchProfile } from "../redux/slices/userSlice";
+import { fetchProfile } from "../redux/slices/users/userSlice";
 import VotesComponent from "../components/VotesComponent";
 import VotesCommentComponent from "../components/voteCommentComponent";
 

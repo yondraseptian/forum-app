@@ -11,7 +11,7 @@ import {
   downVoteCommentAsync,
   neutralizeCommentVoteAsync,
   upVoteCommentAsync,
-} from "../redux/slices/votesSlice.js";
+} from "../redux/slices/votes/votesSlice";
 
 const VotesCommentComponent = ({ threadId, comment }) => {
   const dispatch = useDispatch();

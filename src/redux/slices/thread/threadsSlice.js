@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
-import { getDetailThreadById, getThreads, createThread } from '../../utils/api';
+import { getDetailThreadById, getThreads, createThread } from '../../../utils/api';
 
 export const fetchThreads = createAsyncThunk(
   'threads/fetchThreads',

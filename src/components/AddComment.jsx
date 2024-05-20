@@ -3,7 +3,7 @@ import { Button } from "./Button";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { createCommentAsync } from "../redux/slices/commentSlice";
+import { createCommentAsync } from "../redux/slices/comments/commentSlice";
 const AddComment = ({ isLoggedIn, threadId, onCommentAdded }) => {
   const dispatch = useDispatch();
   const [comment, setComment] = useState("");

@@ -3,7 +3,7 @@ import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { registerUserAsync } from "../redux/slices/authSlice";
+import { registerUserAsync } from "../redux/slices/authUser/authSlice";
 
 const Register = () => {
   const dispatch = useDispatch();

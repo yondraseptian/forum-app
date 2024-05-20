@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLeaderBoard } from "../redux/slices/leaderboardSlice";
+import { fetchLeaderBoard } from "../redux/slices/leaderboard/leaderboardSlice";
 import { useEffect } from "react";
 
 const LeaderBoardPage = () => {

@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <div className="font-sans bg-background max-h-full">
+  <div className="font-sans max-h-full">
     <React.StrictMode>
       <BrowserRouter>
         <Provider store={store}>
