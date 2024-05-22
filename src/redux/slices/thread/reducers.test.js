@@ -5,35 +5,10 @@ import reducer, { fetchThreads, fetchThreadsById, createThreadAsync } from '../t
 /**
  * skenario test untuk reducers
  *
- * - initial state
- *   - mengembalikan state awal saat tidak ada aksi yang cocok
- *
- * - fetchThreads.pending
- *   - mengubah status menjadi 'loading' dan error menjadi null
- *
- * - fetchThreads.fulfilled
- *   - mengubah status menjadi 'succeeded' dan threads diperbarui dengan payload
- *
- * - fetchThreads.rejected
- *   - mengubah status menjadi 'failed' dan error diperbarui dengan pesan error
- *
- * - fetchThreadsById.pending
- *   - mengubah status menjadi 'loading' dan error menjadi null
- *
- * - fetchThreadsById.fulfilled
- *   - mengubah status menjadi 'succeeded' dan detailThread diperbarui dengan payload
- *
- * - fetchThreadsById.rejected
- *   - mengubah status menjadi 'failed' dan error diperbarui dengan pesan error
- *
- * - createThreadAsync.pending
- *   - mengubah status menjadi 'loading' dan error menjadi null
- *
- * - createThreadAsync.fulfilled
- *   - mengubah status menjadi 'succeeded' dan detailThread diperbarui dengan payload
- *
- * - createThreadAsync.rejected
- *   - mengubah status menjadi 'failed' dan error diperbarui dengan pesan error
+ * - should handle initial state
+ * - should handle pending state
+ * - should handle fulfilled state
+ * - should handle rejected state
  */
 
 

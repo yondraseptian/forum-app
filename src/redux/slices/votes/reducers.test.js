@@ -12,39 +12,10 @@ import {
 
 /**
  * skenario test untuk votesSlice (reducer)
- *
- * - initial state
- *   - mengembalikan state awal saat tidak ada aksi yang cocok
- *
- * - upVoteThreadAsync
- *   - pending: mengubah votingStatus menjadi 'loading' dan error menjadi null
- *   - fulfilled: mengubah votingStatus menjadi 'succeeded' dan error menjadi null
- *   - rejected: mengubah votingStatus menjadi 'failed' dan error diperbarui dengan pesan error
- *
- * - downVoteThreadAsync
- *   - pending: mengubah votingStatus menjadi 'loading' dan error menjadi null
- *   - fulfilled: mengubah votingStatus menjadi 'succeeded' dan error menjadi null
- *   - rejected: mengubah votingStatus menjadi 'failed' dan error diperbarui dengan pesan error
- *
- * - neutralizeThreadVoteAsync
- *   - pending: mengubah votingStatus menjadi 'loading' dan error menjadi null
- *   - fulfilled: mengubah votingStatus menjadi 'succeeded' dan error menjadi null
- *   - rejected: mengubah votingStatus menjadi 'failed' dan error diperbarui dengan pesan error
- *
- * - upVoteCommentAsync
- *   - pending: mengubah votingStatus menjadi 'loading' dan error menjadi null
- *   - fulfilled: mengubah votingStatus menjadi 'succeeded' dan error menjadi null
- *   - rejected: mengubah votingStatus menjadi 'failed' dan error diperbarui dengan pesan error
- *
- * - downVoteCommentAsync
- *   - pending: mengubah votingStatus menjadi 'loading' dan error menjadi null
- *   - fulfilled: mengubah votingStatus menjadi 'succeeded' dan error menjadi null
- *   - rejected: mengubah votingStatus menjadi 'failed' dan error diperbarui dengan pesan error
- *
- * - neutralizeCommentVoteAsync
- *   - pending: mengubah votingStatus menjadi 'loading' dan error menjadi null
- *   - fulfilled: mengubah votingStatus menjadi 'succeeded' dan error menjadi null
- *   - rejected: mengubah votingStatus menjadi 'failed' dan error diperbarui dengan pesan error
+ *   - should handle initial state
+ *   - should handle pending state
+ *   - should handle fulfilled state
+ *   - should handle rejected state
  */
 
 

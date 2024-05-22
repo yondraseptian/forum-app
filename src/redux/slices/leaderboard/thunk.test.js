@@ -19,9 +19,10 @@ vi.mock('react-redux-loading-bar', () => ({
  * skenario test untuk thunks
  *
  * - fetchLeaderBoard
- *   - pending: dispatch showLoading, mengubah status menjadi 'loading' dan error menjadi null
- *   - fulfilled: dispatch hideLoading, mengubah status menjadi 'succeeded', leaderboards diperbarui dengan payload, dan error menjadi null
- *   - rejected: dispatch hideLoading, mengubah status menjadi 'failed' dan error diperbarui dengan pesan error
+ *   - should handle initial state
+ *   - should dispatch showLoading and hideLoading actionsl
+ *   - should handle fulfilled state
+ *   - should handle rejected state
  */
 
 describe('leaderboardsSlice', () => {
