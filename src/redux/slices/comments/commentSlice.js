@@ -39,11 +39,7 @@ const commentSlice = createSlice({
         status: 'succeeded',
         comment: action.payload,
       }))
-      .addCase(createCommentAsync.rejected, (state, action) => ({
-        ...state,
-        status: 'failed',
-        error: action.error.message,
-      }));
+      
   },
 
 });
