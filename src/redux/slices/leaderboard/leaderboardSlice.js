@@ -39,7 +39,11 @@ const leaderboardsSlice = createSlice({
         status: 'succeeded',
         leaderboards: action.payload,
       }))
-    
+      .addCase(fetchLeaderBoard.rejected, (state, action) => ({
+        ...state,
+        status: 'failed',
+        error: action.error.message,
+      }));
   },
 
 });
