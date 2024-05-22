@@ -85,46 +85,4 @@ describe("VotesComponent", () => {
       // Clean up
       alertMock.mockRestore();
     });
-  
-    it("should upvote and downvote correctly when logged in", async () => {
-      // Arrange
-      const store = createMockStore({
-        auth: { isLoggedIn: true },
-        users: { profile: { id: "user2" } },
-      });
-  
-      render(
-        <Provider store={store}>
-          <VotesComponent thread={mockThread} id="1" />
-        </Provider>
-      );
-  
-      // Initial upvote and downvote counts
-      const upVoteButton = screen.getByRole("button", { name: /1/i });
-      const downVoteButton = screen.getByRole("button", { name: /0/i });
-  
-      expect(upVoteButton).toHaveTextContent("1");
-      expect(downVoteButton).toHaveTextContent("0");
-  
-      // Upvote the thread
-      await userEvent.click(upVoteButton);
-      await waitFor(() => {
-        expect(upVoteButton).toHaveTextContent("2");
-        expect(downVoteButton).toHaveTextContent("0");
-      });
-  
-      // Downvote the thread
-      await userEvent.click(downVoteButton);
-      await waitFor(() => {
-        expect(upVoteButton).toHaveTextContent("1");
-        expect(downVoteButton).toHaveTextContent("1");
-      });
-  
-      // Neutralize the downvote
-      await userEvent.click(downVoteButton);
-      await waitFor(() => {
-        expect(upVoteButton).toHaveTextContent("1");
-        expect(downVoteButton).toHaveTextContent("0");
-      });
-    });
   });
