@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import { createComment } from '../../../utils/api';

@@ -1,24 +1,33 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable no-alert */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable react/button-has-type */
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable no-shadow */
+/* eslint-disable no-use-before-define */
+/* eslint-disable import/no-extraneous-dependencies */
 import {
   AiFillDislike,
   AiFillLike,
   AiOutlineDislike,
   AiOutlineLike,
-} from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+} from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   downVoteCommentAsync,
   neutralizeCommentVoteAsync,
   upVoteCommentAsync,
-} from "../redux/slices/votes/votesSlice";
+} from '../redux/slices/votes/votesSlice';
 
-const VotesCommentComponent = ({ threadId, comment }) => {
+function VotesCommentComponent({ threadId, comment }) {
   const dispatch = useDispatch();
   const [voteType, setVoteType] = useState(0);
   const [upVotesCount, setUpVotesCount] = useState(comment.upVotesBy.length);
   const [downVotesCount, setDownVotesCount] = useState(
-    comment.downVotesBy.length
+    comment.downVotesBy.length,
   );
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const userId = useSelector((state) => state.users.profile?.id);
@@ -29,36 +38,35 @@ const VotesCommentComponent = ({ threadId, comment }) => {
       setUpVotesCount(comment.upVotesBy.length);
       setDownVotesCount(comment.downVotesBy.length);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [comment]);
 
   const getVoteTypeForUser = (comment) => {
     if (userId) {
       if (comment.upVotesBy.includes(userId)) {
         return 1;
-      } else if (comment.downVotesBy.includes(userId)) {
+      } if (comment.downVotesBy.includes(userId)) {
         return -1;
       }
     }
     return 0;
   };
 
-  const id = comment.id;
+  const { id } = comment;
 
   const handleVote = async (vote) => {
     if (!isLoggedIn) {
-      alert("Silakan login terlebih dahulu");
+      alert('Silakan login terlebih dahulu');
       return;
     }
 
     switch (vote) {
       case 1:
         if (voteType === 1) {
-          await dispatch(neutralizeCommentVoteAsync({ threadId, commentId:id }));
+          await dispatch(neutralizeCommentVoteAsync({ threadId, commentId: id }));
           setVoteType(0);
           setUpVotesCount(upVotesCount - 1);
         } else {
-          await dispatch(upVoteCommentAsync({ threadId, commentId:id }));
+          await dispatch(upVoteCommentAsync({ threadId, commentId: id }));
           setVoteType(1);
           setUpVotesCount(upVotesCount + 1);
           if (voteType === -1) {
@@ -68,11 +76,11 @@ const VotesCommentComponent = ({ threadId, comment }) => {
         break;
       case -1:
         if (voteType === -1) {
-          await dispatch(neutralizeCommentVoteAsync({ threadId, commentId:id }));
+          await dispatch(neutralizeCommentVoteAsync({ threadId, commentId: id }));
           setVoteType(0);
           setDownVotesCount(downVotesCount - 1);
         } else {
-          await dispatch(downVoteCommentAsync({ threadId, commentId:id }));
+          await dispatch(downVoteCommentAsync({ threadId, commentId: id }));
           setVoteType(-1);
           setDownVotesCount(downVotesCount + 1);
           if (voteType === 1) {
@@ -109,7 +117,7 @@ const VotesCommentComponent = ({ threadId, comment }) => {
       </button>
     </div>
   );
-};
+}
 
 export default VotesCommentComponent;
 

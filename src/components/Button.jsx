@@ -1,5 +1,15 @@
-import PropTypes from "prop-types";
-export const Button = ({ children, className, onClick, disabled }) => {
+/* eslint-disable linebreak-style */
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/default-props-match-prop-types */
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/button-has-type */
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable import/no-extraneous-dependencies */
+import PropTypes from 'prop-types';
+
+export function Button({
+  children, className, onClick, disabled,
+}) {
   return (
     <div>
       <button className={className} onClick={onClick} disabled={disabled}>
@@ -7,7 +17,7 @@ export const Button = ({ children, className, onClick, disabled }) => {
       </button>
     </div>
   );
-};
+}
 
 Button.defaultProps = {
   disabled: false,

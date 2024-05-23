@@ -1,7 +1,11 @@
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+/* eslint-disable linebreak-style */
+/* eslint-disable react/button-has-type */
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable import/no-extraneous-dependencies */
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const HeaderNav = ({ handleLogout, isLoggedIn }) => {
+function HeaderNav({ handleLogout, isLoggedIn }) {
   return (
     <div className="flex justify-between items-center p-4 border-solid border-b-2 fixed w-full bg-primary z-20">
       <h1 className="text-2xl font-bold text-background">Forum App</h1>
@@ -37,7 +41,7 @@ const HeaderNav = ({ handleLogout, isLoggedIn }) => {
       </ul>
     </div>
   );
-};
+}
 
 export default HeaderNav;
 

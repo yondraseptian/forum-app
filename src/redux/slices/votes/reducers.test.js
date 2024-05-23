@@ -1,14 +1,14 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable max-len */
 import { describe, it, expect } from 'vitest';
-import votesReducer from './votesSlice';
-import { 
-  upVoteThreadAsync, 
-  downVoteThreadAsync, 
-  neutralizeThreadVoteAsync, 
-  upVoteCommentAsync, 
-  downVoteCommentAsync, 
-  neutralizeCommentVoteAsync 
+import votesReducer, {
+  upVoteThreadAsync,
+  downVoteThreadAsync,
+  neutralizeThreadVoteAsync,
+  upVoteCommentAsync,
+  downVoteCommentAsync,
+  neutralizeCommentVoteAsync,
 } from './votesSlice';
-
 
 /**
  * skenario test untuk votesSlice (reducer)
@@ -18,14 +18,13 @@ import {
  *   - should handle rejected state
  */
 
-
-  describe('votesSlice', () => {
-    it('should handle initial state', () => {
-      expect(votesReducer(undefined, {})).toEqual({
-        votingStatus: 'idle',
-        error: null,
-      });
+describe('votesSlice', () => {
+  it('should handle initial state', () => {
+    expect(votesReducer(undefined, {})).toEqual({
+      votingStatus: 'idle',
+      error: null,
     });
+  });
   describe('upVoteThreadAsync', () => {
     it('should handle pending state', () => {
       expect(votesReducer(undefined, { type: upVoteThreadAsync.pending.type })).toEqual({

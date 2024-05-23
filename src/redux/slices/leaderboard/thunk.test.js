@@ -1,8 +1,11 @@
-import { describe, it, expect, vi } from 'vitest';
+/* eslint-disable linebreak-style */
+import {
+  describe, it, expect, vi,
+} from 'vitest';
 import { configureStore } from '@reduxjs/toolkit';
+import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import leaderboardsReducer, { fetchLeaderBoard } from './leaderboardSlice';
 import { getLeaderBoard } from '../../../utils/api';
-import { hideLoading, showLoading } from 'react-redux-loading-bar';
 
 // Mock the API call
 vi.mock('../../../utils/api', () => ({
@@ -39,7 +42,7 @@ describe('leaderboardsSlice', () => {
       const dispatch = vi.fn();
       const getState = vi.fn();
       const leaderboards = [{ id: 1, name: 'Test Leaderboard' }];
-      
+
       getLeaderBoard.mockResolvedValueOnce(leaderboards);
 
       await fetchLeaderBoard()(dispatch, getState, undefined);

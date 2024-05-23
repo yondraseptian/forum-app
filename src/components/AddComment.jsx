@@ -1,16 +1,21 @@
-import { Link } from "react-router-dom";
-import { Button } from "./Button";
-import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
-import { createCommentAsync } from "../redux/slices/comments/commentSlice";
-const AddComment = ({ isLoggedIn, threadId, onCommentAdded }) => {
+/* eslint-disable linebreak-style */
+/* eslint-disable no-alert */
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable import/no-extraneous-dependencies */
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { Button } from './Button';
+import { createCommentAsync } from '../redux/slices/comments/commentSlice';
+
+function AddComment({ isLoggedIn, threadId, onCommentAdded }) {
   const dispatch = useDispatch();
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState('');
 
   const handleCreateComment = async () => {
     if (!comment.trim()) {
-      alert("isi comment");
+      alert('isi comment');
       return;
     }
 
@@ -20,10 +25,10 @@ const AddComment = ({ isLoggedIn, threadId, onCommentAdded }) => {
 
     try {
       await dispatch(createCommentAsync({ threadId, commentData }));
-      setComment("");
+      setComment('');
       onCommentAdded();
     } catch (error) {
-      alert("gagal menambahkan comment" + error.massage);
+      alert(`gagal menambahkan comment${error.massage}`);
     }
   };
   return (
@@ -39,7 +44,7 @@ const AddComment = ({ isLoggedIn, threadId, onCommentAdded }) => {
             id=""
             cols="30"
             rows="10"
-          ></textarea>
+          />
           <Button
             className="bg-primary text-white my-3 w-full py-3 rounded-md"
             onClick={handleCreateComment}
@@ -51,13 +56,15 @@ const AddComment = ({ isLoggedIn, threadId, onCommentAdded }) => {
         <p className="text-center">
           <span className="font-bold text-primary underline">
             <Link to="/login">Login</Link>
-          </span>{" "}
-          terlebih dahulu untuk memberi komentar{" "}
+          </span>
+          {' '}
+          terlebih dahulu untuk memberi komentar
+          {' '}
         </p>
       )}
     </div>
   );
-};
+}
 
 export default AddComment;
 

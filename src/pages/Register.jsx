@@ -1,30 +1,32 @@
-import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../components/Button";
-import { Input } from "../components/Input";
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { registerUserAsync } from "../redux/slices/authUser/authSlice";
+/* eslint-disable linebreak-style */
+/* eslint-disable no-alert */
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable no-shadow */
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { Button } from '../components/Button';
+import { Input } from '../components/Input';
+import { registerUserAsync } from '../redux/slices/authUser/authSlice';
 
-const Register = () => {
+function Register() {
   const dispatch = useDispatch();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const { loading, error } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const handleRegister = async () => {
     try {
       await dispatch(registerUserAsync({ name, email, password }));
-      if(!error) {
-        navigate("/login");
-      } else {
-        if (error !== "Unauthorized") {
-          alert("Failed to register: " + error);
-        }
+      if (!error) {
+        navigate('/login');
+      } else if (error !== 'Unauthorized') {
+        alert(`Failed to register: ${error}`);
       }
     } catch (error) {
-      alert("Failed to register: " + error.message);
+      alert(`Failed to register: ${error.message}`);
     }
   };
 
@@ -67,13 +69,14 @@ const Register = () => {
       </Button>
       {error && <p className="text-red-500">{error}</p>}
       <p>
-        Sudah punya akun?{" "}
+        Sudah punya akun?
+        {' '}
         <Link to="/login">
           <span className="font-bold">Login</span>
         </Link>
       </p>
     </div>
   );
-};
+}
 
 export default Register;
