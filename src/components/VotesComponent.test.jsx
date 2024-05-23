@@ -84,4 +84,5 @@ describe("VotesComponent", () => {
       // Clean up
       alertMock.mockRestore();
     });
+    
   });
