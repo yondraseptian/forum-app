@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import { configureStore } from '@reduxjs/toolkit';
 import { loadingBarReducer } from 'react-redux-loading-bar';
 import threadsSlice from './slices/thread/threadsSlice';
