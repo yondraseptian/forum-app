@@ -1,6 +1,6 @@
+/* eslint-disable linebreak-style */
 import { describe, it, expect } from 'vitest';
-import reducer, { fetchThreads, fetchThreadsById, createThreadAsync } from '../thread/threadsSlice';
-
+import reducer, { fetchThreads, fetchThreadsById, createThreadAsync } from './threadsSlice';
 
 /**
  * skenario test untuk reducers
@@ -10,7 +10,6 @@ import reducer, { fetchThreads, fetchThreadsById, createThreadAsync } from '../t
  * - should handle fulfilled state
  * - should handle rejected state
  */
-
 
 const initialState = {
   threads: [],

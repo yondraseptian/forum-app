@@ -1,10 +1,16 @@
-import { formatDate } from "../utils/dateFormat";
-import { FaRegComments } from "react-icons/fa6";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import VotesComponent from "./VotesComponent";
+/* eslint-disable linebreak-style */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/button-has-type */
+/* eslint-disable react/no-danger */
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable import/no-extraneous-dependencies */
+import { FaRegComments } from 'react-icons/fa6';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { formatDate } from '../utils/dateFormat';
+import VotesComponent from './VotesComponent';
 
-const ListTreads = (props) => {
+function ListTreads(props) {
   const { threads, users } = props;
 
   return (
@@ -14,7 +20,10 @@ const ListTreads = (props) => {
         return (
           <div className="justify-start flex px-6" key={thread.id}>
             <div className="border-solid border-b-2 p-2 w-full">
-              <p className="text-base font-medium border-solid border-2 px-2 py-1 w-fit border-primary rounded-lg">#{thread.category}</p>
+              <p className="text-base font-medium border-solid border-2 px-2 py-1 w-fit border-primary rounded-lg">
+                #
+                {thread.category}
+              </p>
               <Link to={`/threads/${thread.id}`}>
                 <h1 className="text-xl font-bold cursor-pointer">
                   {thread.title}
@@ -38,7 +47,9 @@ const ListTreads = (props) => {
                 <p>{formatDate(thread.createdAt)}</p>
                 {owner && (
                   <p>
-                    dibuat oleh <b>{owner.name}</b>
+                    dibuat oleh
+                    {' '}
+                    <b>{owner.name}</b>
                   </p>
                 )}
               </div>
@@ -48,7 +59,7 @@ const ListTreads = (props) => {
       })}
     </>
   );
-};
+}
 
 export default ListTreads;
 

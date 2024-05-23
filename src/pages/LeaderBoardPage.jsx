@@ -1,22 +1,30 @@
-import { useDispatch, useSelector } from "react-redux";
-import { fetchLeaderBoard } from "../redux/slices/leaderboard/leaderboardSlice";
-import { useEffect } from "react";
+/* eslint-disable linebreak-style */
+/* eslint-disable react/react-in-jsx-scope */
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchLeaderBoard } from '../redux/slices/leaderboard/leaderboardSlice';
 
-const LeaderBoardPage = () => {
+function LeaderBoardPage() {
   const dispatch = useDispatch();
   const leaderboards = useSelector((state) => state.leaderboard.leaderboards);
   const { status, error } = useSelector((state) => state.leaderboard);
 
   useEffect(() => {
-    dispatch(fetchLeaderBoard())
+    dispatch(fetchLeaderBoard());
   }, [dispatch]);
   return (
     <div>
       <h1 className="text-4xl pb-4 ml-3">LeaderBoardPage</h1>
       <div>
-        {status === "loading" && <div>Loading...</div>}
-        {status === "failed" && <div>Error: {error}</div>}
-        {status === "succeeded" && (
+        {status === 'loading' && <div>Loading...</div>}
+        {status === 'failed' && (
+        <div>
+          Error:
+          {' '}
+          {error}
+        </div>
+        )}
+        {status === 'succeeded' && (
           <div className="flex flex-col gap-4 px-3">
             {leaderboards.map((leaderboard) => (
               <div
@@ -35,6 +43,6 @@ const LeaderBoardPage = () => {
       </div>
     </div>
   );
-};
+}
 
 export default LeaderBoardPage;

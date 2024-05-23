@@ -1,12 +1,15 @@
-// import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import ListTreads from "../components/ListTreads";
-import { useEffect, useState } from "react";
-import { fetchThreads } from "../redux/slices/thread/threadsSlice";
-import { fetchProfile, fetchUsers } from "../redux/slices/users/userSlice";
-import { Link } from "react-router-dom";
+/* eslint-disable linebreak-style */
+/* eslint-disable eqeqeq */
+/* eslint-disable react/button-has-type */
+/* eslint-disable react/react-in-jsx-scope */
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import ListTreads from '../components/ListTreads';
+import { fetchThreads } from '../redux/slices/thread/threadsSlice';
+import { fetchProfile, fetchUsers } from '../redux/slices/users/userSlice';
 
-const Home = () => {
+function Home() {
   const dispatch = useDispatch();
   const threads = useSelector((state) => state.threads.threads);
   const users = useSelector((state) => state.users.users);
@@ -15,7 +18,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchThreads());
-    dispatch(fetchProfile(localStorage.getItem("token")));
+    dispatch(fetchProfile(localStorage.getItem('token')));
     dispatch(fetchUsers());
   }, [dispatch]);
 
@@ -23,9 +26,8 @@ const Home = () => {
     setSelectedCategory((prevCategory) => {
       if (prevCategory == category) {
         return null;
-      } else {
-        return category;
       }
+      return category;
     });
   };
 
@@ -43,12 +45,13 @@ const Home = () => {
               <button
                 className={`text-primary border-solid border-2 border-primary px-4 py-2 rounded-full shadow-lg  ${
                   thread.category === selectedCategory
-                    ? "bg-primary text-white"
-                    : ""
+                    ? 'bg-primary text-white'
+                    : ''
                 }`}
                 onClick={() => filterByCategory(thread.category)}
               >
-                #{thread.category}
+                #
+                {thread.category}
               </button>
             </li>
           ))}
@@ -67,6 +70,6 @@ const Home = () => {
       ) : null}
     </div>
   );
-};
+}
 
 export default Home;

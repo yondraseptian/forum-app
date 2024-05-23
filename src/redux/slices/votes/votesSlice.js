@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
   upVoteThread,
@@ -168,6 +169,5 @@ const votesSlice = createSlice({
       });
   },
 });
-
 
 export default votesSlice.reducer;

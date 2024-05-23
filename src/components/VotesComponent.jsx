@@ -1,24 +1,33 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable no-alert */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable react/button-has-type */
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable no-shadow */
+/* eslint-disable no-use-before-define */
+/* eslint-disable import/no-extraneous-dependencies */
 import {
   AiFillDislike,
   AiFillLike,
   AiOutlineDislike,
   AiOutlineLike,
-} from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+} from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   downVoteThreadAsync,
   neutralizeThreadVoteAsync,
   upVoteThreadAsync,
-} from "../redux/slices/votes/votesSlice";
+} from '../redux/slices/votes/votesSlice';
 
-const VotesComponent = ({ thread, id }) => {
+function VotesComponent({ thread, id }) {
   const dispatch = useDispatch();
   const [voteType, setVoteType] = useState(0);
   const [upVotesCount, setUpVotesCount] = useState(thread.upVotesBy.length);
   const [downVotesCount, setDownVotesCount] = useState(
-    thread.downVotesBy.length
+    thread.downVotesBy.length,
   );
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const userId = useSelector((state) => state.users.profile?.id);
@@ -29,14 +38,13 @@ const VotesComponent = ({ thread, id }) => {
       setUpVotesCount(thread.upVotesBy.length);
       setDownVotesCount(thread.downVotesBy.length);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [thread]);
 
   const getVoteTypeForUser = (thread) => {
     if (userId) {
       if (thread.upVotesBy.includes(userId)) {
         return 1;
-      } else if (thread.downVotesBy.includes(userId)) {
+      } if (thread.downVotesBy.includes(userId)) {
         return -1;
       }
     }
@@ -45,7 +53,7 @@ const VotesComponent = ({ thread, id }) => {
 
   const handleVote = async (vote) => {
     if (!isLoggedIn) {
-      alert("Silakan login terlebih dahulu");
+      alert('Silakan login terlebih dahulu');
       return;
     }
 
@@ -107,7 +115,7 @@ const VotesComponent = ({ thread, id }) => {
       </button>
     </div>
   );
-};
+}
 
 export default VotesComponent;
 
