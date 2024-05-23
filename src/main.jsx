@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable import/extensions */
 /* eslint-disable import/order */
 import React from 'react';
