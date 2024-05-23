@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "e2e": "cypress run",
-    "ci:test": "vitest --no-watch && start-server-and-test 'npm run dev' http-get://localhost:5173 e2e  --timeout 300000"
+    "ci:test": "vitest --no-watch && start-server-and-test 'npm run dev' http-get://localhost:5173 e2e"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.5",

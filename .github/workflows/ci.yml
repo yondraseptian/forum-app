@@ -25,6 +25,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Start server
+        run: |
+          npm run dev &
+          sleep 15
+          curl -I http://localhost:5173
+
       - name: Run tests
         env:
           CI: true
